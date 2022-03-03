@@ -10,24 +10,29 @@ import java.util.stream.Stream;
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
         printSplash("src/hexmarch/splash.txt");
+      //  printSplash("hexmarch/splash.txt");
+
+        Utility util = new Utility();
+        util.setTextDelay(300L);
 
         Map<Integer, String> menuOptions = Map.of(
-                1, "Iryna's Option",
-                2, "Option 2",
+                1, "Consult the Orb",
+                2, "{ Luis Function }",
                 3, "Exit"
         );
 
         int selected = printMenu(menuOptions);
         switch(selected) {
             case 1:
-                irynaFunction();
+                summonOrb();
             default:
                 // Do nothing
         }
     }
 
-    private static void irynaFunction() {
-        System.out.println("Iryna Function");
+    private static void summonOrb() throws IOException, InterruptedException{
+        Orb orb = new Orb();
+        orb.summon();
     }
 
     private static int printMenu(Map<Integer, String> options)  {
@@ -65,12 +70,12 @@ public class Main {
         lines.forEach(System.out::println);
     }
 
-    private static void printDelayedText(String text, long delay) throws InterruptedException {
-        for(char ch: text.toCharArray()) {
-            System.out.print(ch);
-            Thread.sleep(delay);
-            System.out.flush();
-        }
-        System.out.println();
-    }
+//    private static void printDelayedText(String text, long delay) throws InterruptedException {
+//            for(char ch: text.toCharArray()) {
+//                System.out.print(ch);
+//                Thread.sleep(delay);
+//                System.out.flush();
+//            }
+//            System.out.println();
+//    }
 }
