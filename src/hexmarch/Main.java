@@ -5,26 +5,31 @@ import java.util.Scanner;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.TreeMap;
 import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
-        printSplash("src/hexmarch/splash.txt");
-      //  printSplash("hexmarch/splash.txt");
+      //  printSplash("src/hexmarch/splash.txt");
+        Utility.printSplash("hexmarch/splash.txt");
 
         Utility util = new Utility();
         util.setTextDelay(300L);
 
-        Map<Integer, String> menuOptions = Map.of(
+        Map<Integer, String> menuOptions = new TreeMap(Map.of(
                 1, "Consult the Orb",
-                2, "{ Luis Function }",
+                2, "Manage Pet",
                 3, "Exit"
-        );
+        ));
 
         int selected = printMenu(menuOptions);
         switch(selected) {
             case 1:
                 summonOrb();
+                break;
+            case 2:
+                managePet();
+                break;
             default:
                 // Do nothing
         }
@@ -33,6 +38,34 @@ public class Main {
     private static void summonOrb() throws IOException, InterruptedException{
         Orb orb = new Orb();
         orb.summon();
+    }
+
+    private static void managePet() {
+        PetHandler petHandler = new PetHandler();
+
+
+        Map<Integer, String> petOptions = new TreeMap(Map.of(
+                1, "Create New Pet",
+                2, "Manage Current Pet",
+                3, "Exit"
+        ));
+
+        System.out.println("\n\nWelcome to the Pet Handler!");
+
+        int selected = printMenu(petOptions);
+        switch(selected) {
+            case 1:
+                petHandler.newDryRubi();
+                break;
+            case 2:
+                petHandler.readDryRubi();
+                break;
+            default:
+                // Exit
+        }
+
+        petHandler.watchPet();
+        petHandler.saveDryRubi();
     }
 
     private static int printMenu(Map<Integer, String> options)  {
@@ -63,11 +96,6 @@ public class Main {
         } while(true);
 
         return selectedOption;
-    }
-
-    private static void printSplash(String filename) throws IOException {
-        Stream<String> lines = Files.lines(Paths.get(filename));
-        lines.forEach(System.out::println);
     }
 
 //    private static void printDelayedText(String text, long delay) throws InterruptedException {

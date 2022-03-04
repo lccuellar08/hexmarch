@@ -1,5 +1,10 @@
 package hexmarch;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.stream.Stream;
+
 public class Utility {
     private static long delay = 40L; // Default delay
 
@@ -14,5 +19,14 @@ public class Utility {
             System.out.flush();
         }
         System.out.println();
+    }
+
+    public static void printSplash(String filename) {
+        try {
+            Stream<String> lines = Files.lines(Paths.get(filename));
+            lines.forEach(System.out::println);
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
     }
 }

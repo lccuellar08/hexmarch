@@ -7,8 +7,8 @@ import java.util.stream.Stream;
 import java.util.List;
 
 public class Orb {
-    String orb_file = "src/hexmarch/orb.txt";
-   // String orb_file = "hexmarch/orb.txt";
+   // String orb_file = "src/hexmarch/orb.txt";
+    String orb_file = "hexmarch/orb.txt";
 
     public void summon() throws IOException, InterruptedException {
         Stream<String> lines = Files.lines(Paths.get(this.orb_file));
