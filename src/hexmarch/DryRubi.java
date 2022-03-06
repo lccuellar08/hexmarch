@@ -32,6 +32,8 @@ public class DryRubi implements Serializable {
         this.currentStage = currentStage;
     }
 
+    public String getName() { return name; }
+
     public int getTotalEnergy() {
         return totalEnergy;
     }
@@ -52,13 +54,15 @@ public class DryRubi implements Serializable {
         switch(currentStage) {
             case EGG:
             case PUPA:
-                // Eggs and Pupa's don't eat
+                System.out.println("Eggs and Pupas can't eat");
                 break;
             case MOTH:
             case CATERPILLAR:
                 if(this.totalSaturation < this.MAX_SATURATION) {
                     this.totalSaturation += 3;
-                } // Else do nothing, too full to eat
+                } else {
+                    System.out.println(name + " is too full to eat");
+                }
                 break;
         }
 
@@ -69,7 +73,7 @@ public class DryRubi implements Serializable {
         switch(currentStage) {
             case EGG:
             case PUPA:
-                // Eggs and Pupa's don't play
+                System.out.println("Eggs and Pupa's can't play");
                 break;
             case MOTH:
                 if(this.totalEnergy > 0) {
@@ -79,7 +83,9 @@ public class DryRubi implements Serializable {
             case CATERPILLAR:
                 if(this.totalEnergy > 0) {
                     this.totalEnergy -= 3;
-                } // Else do nothing, too tired to play
+                } else {
+                    System.out.println(name + " is too tired to play");
+                }
                 break;
         }
         return this.totalEnergy;

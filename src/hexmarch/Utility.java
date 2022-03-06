@@ -3,6 +3,7 @@ package hexmarch;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Stream;
@@ -60,5 +61,34 @@ public class Utility {
         } while(true);
 
         return selectedOption;
+    }
+
+    public static void printAnimation(String fileName, int frameSize, boolean clearAtEnd) {
+        try {
+            Stream<String> lines = Files.lines(Paths.get(fileName));
+            List<String> linesList = lines.toList();
+            int lineLength = linesList.size();
+            int line_num = 0;
+
+            for (String line : linesList) {
+                line_num += 1;
+                System.out.println(line);
+                // Thread.sleep(40L);
+                System.out.flush();
+                if (line_num != lineLength || clearAtEnd) {
+                    if (line_num % frameSize == 0) {
+                        //Clears Screen in java
+                        Thread.sleep(40L);
+                        if (System.getProperty("os.name").contains("Windows"))
+                            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                        else {
+                            new ProcessBuilder("clear").inheritIO().start().waitFor();
+                        }
+                    }
+                }
+            }
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

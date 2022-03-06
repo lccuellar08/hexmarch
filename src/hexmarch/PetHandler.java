@@ -1,7 +1,9 @@
 package hexmarch;
 
 import java.io.*;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 public class PetHandler {
     DryRubi dryRubi;
@@ -48,8 +50,80 @@ public class PetHandler {
         }
     }
 
+    public void handlePet() {
+        dryRubi.tick();
+        String name = dryRubi.getName();
+
+        Map<Integer, String> handleOptions = new TreeMap(Map.of(
+                1, "Feed "+name,
+                2, "Play with "+name,
+                3, "Exit"
+        ));
+
+        int selected;
+
+        do {
+            watchPet();
+            selected = Utility.printMenu(handleOptions);
+
+            switch(selected) {
+                case 1:
+                    giveFood();
+                    break;
+                case 2:
+                    playWithPet();
+                    break;
+                default:
+                    break;
+            }
+
+            dryRubi.tick();
+
+        } while(!handleOptions.get(selected).equals("Exit"));
+    }
+
+    private void giveFood() {
+        switch(dryRubi.getCurrentStage()) {
+            case EGG:
+            case PUPA:
+            case MOTH:
+                break;
+            case CATERPILLAR:
+                Utility.printAnimation("hexmarch/CaterpillarEat.txt", 5, true);
+                break;
+        }
+        dryRubi.eatFood();
+    }
+
+    private void playWithPet() {
+        switch(dryRubi.getCurrentStage()) {
+            case EGG:
+            case PUPA:
+            case MOTH:
+                break;
+            case CATERPILLAR:
+                Utility.printAnimation("hexmarch/CaterpillarPlay.txt", 5, true);
+                Utility.printAnimation("hexmarch/CaterpillarPlay.txt", 5, true);
+                Utility.printAnimation("hexmarch/CaterpillarPlay.txt", 5, true);
+                break;
+        }
+        dryRubi.play();
+    }
+
     public void watchPet() {
-        Utility.printSplash("hexmarch/Egg.txt");
+        switch(dryRubi.getCurrentStage()) {
+            case EGG:
+                Utility.printSplash("hexmarch/Egg.txt");
+                break;
+            case CATERPILLAR:
+                Utility.printSplash("hexmarch/Caterpillar.txt");
+                break;
+            case PUPA:
+                break;
+            case MOTH:
+                break;
+        }
+
         System.out.println(dryRubi);
     }
 }

@@ -18,17 +18,22 @@ public class Main {
                 3, "Exit"
         ));
 
-        int selected = Utility.printMenu(menuOptions);
-        switch(selected) {
-            case 1:
-                summonOrb();
-                break;
-            case 2:
-                managePet();
-                break;
-            default:
-                // Do nothing
-        }
+        int selected;
+
+        do {
+            selected = Utility.printMenu(menuOptions);
+            switch(selected) {
+                case 1:
+                    summonOrb();
+                    break;
+                case 2:
+                    managePet();
+                    break;
+                default:
+                    // Do nothing
+            }
+        } while(!menuOptions.get(selected).equals("Exit"));
+
     }
 
     private static void summonOrb() throws IOException, InterruptedException{
@@ -59,7 +64,7 @@ public class Main {
                 // Exit
         }
 
-        petHandler.watchPet();
+        petHandler.handlePet();
         petHandler.saveDryRubi();
     }
 }
