@@ -68,6 +68,8 @@ public class Utility {
             Stream<String> lines = Files.lines(Paths.get(fileName));
             List<String> linesList = lines.toList();
             int lineLength = linesList.size();
+            System.out.println("file length: "+ String.valueOf(lineLength));
+
             int line_num = 0;
 
             for (String line : linesList) {
