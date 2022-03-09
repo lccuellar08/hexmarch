@@ -1,5 +1,7 @@
 package hexmarch;
 
+import jdk.jshell.execution.Util;
+
 import java.util.Map;
 import java.io.IOException;
 import java.util.TreeMap;
@@ -15,7 +17,8 @@ public class Main {
         Map<Integer, String> menuOptions = new TreeMap(Map.of(
                 1, "Consult the Orb",
                 2, "Manage Pet",
-                3, "Exit"
+                3, "[dev] Run Tests",
+                4, "Exit"
         ));
 
         int selected;
@@ -28,6 +31,9 @@ public class Main {
                     break;
                 case 2:
                     managePet();
+                    break;
+                case 3:
+                    runTests();
                     break;
                 default:
                     // Do nothing
@@ -66,5 +72,14 @@ public class Main {
 
         petHandler.handlePet();
         petHandler.saveDryRubi();
+    }
+
+    private static void runTests(){
+        // Test 1: sending an email
+        System.out.println("\n>>> Running test 1: sending an email");
+        Utility.SendEmail();
+        System.out.println();
+
+        //
     }
 }
