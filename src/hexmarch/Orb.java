@@ -58,7 +58,8 @@ public class Orb {
         String cap = desire_input.substring(0, 1).toUpperCase();
         String user_desire = cap + desire_input.substring(1);
         // TEMP OUTPUT:
-        System.out.println(">>"+user_desire+"... this is what human desires? Interesting.<<<");
+        Desires.AcquireDesires(user_desire);
+        //System.out.println(">>"+user_desire+"... this is what human desires? Interesting.<<<");
     }
 
     private void offerSacrifice(){
