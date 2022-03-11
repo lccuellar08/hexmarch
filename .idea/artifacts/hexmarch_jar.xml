@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="hexmarch:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/hexmarch_jar</output-path>
+    <root id="archive" name="hexmarch.jar">
+      <element id="module-output" name="hexmarch" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/javax.mail-1.6.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/activation-1.1.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/javax.mail-api-1.6.2.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
